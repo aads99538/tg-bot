@@ -1,23 +1,50 @@
-import telebot
 import time
+import telegram
 
-TOKEN = '7764076864:AAF-0KuyEufJIS7mC6u1nT2ZwA0YXKuYlhY'
-CHANNEL_ID = '-1001746118789'
+# Токен бота
+bot_token = '7764076864:AAF-0KuyEufJIS7mC6u1nT2ZwA0YXKu>
 
-bot = telebot.TeleBot(TOKEN)
+# ID канала
+channel_id = -1001746118789
 
-message_id = None
+# Текст сообщения
+message_text = "Происходит взлом жопы"
 
+# Создаем бота
+bot = telegram.Bot(token=bot_token)
+
+# Получаем ID последнего сообщения
+last_message_id = None
+
+# Функция для обновления точек
+def update_dots():
+  dots = "."
+  while True:
+    yield dots
+    dots += "."
+    if len(dots) > 5:
+      dots = "."
+    time.sleep(0.1)
+
+# Получаем итератор для обновления точек
+dots_iterator = update_dots()
+
+# Бесконечный цикл для отправки сообщений
 while True:
-    dots = '.' * ((time.time() // 1) % 4)  # Обновление точек
-    message_text = f'происходит взлом жопы{dots}'
-    
-    if message_id:
-        # Обновляем сообщение
-        bot.edit_message_text(message_text, chat_id=CHANNEL_ID, message_id=message_id)
-    else:
-        # Отправляем первое сообщение
-        sent_message = bot.send_message(CHANNEL_ID, message_text)
-        message_id = sent_message.message_id
+  try:
+    # Получаем следующую комбинацию точек
+    dots = next(dots_iterator)
 
-    time.sleep(1)  # Обновление каждую секунду
+    # Проверяем, отправлено ли сообщение ранее
+    if last_message_id is None:
+      # Отправляем сообщение в канал
+      last_message = bot.send_message(chat_id=channel_i>
+      last_message_id = last_message.message_id
+
+    else:
+      # Обновляем сообщение
+      bot.edit_message_text(
+        chat_id=channel_id,
+        message_id=last_message_id,
+        text=f"{message_text}{dots}"
+      )
