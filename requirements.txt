@@ -1,6 +1,6 @@
-telebot
-pyTelegramBotAPI
-telegram
-Flask==2.3.2
-requests==2.31.0
+teleboto 0.0.5
+pyTelegramBotAPI=4.22.1
+telegram==0.0.1
+Flask==3.0.3
+requests==2.32.4
 gunicorn
